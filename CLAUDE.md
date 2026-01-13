@@ -27,30 +27,24 @@ openssl rand -hex 32
 ```
 Add this to `.env.local` as `JWT_SECRET`.
 
-### 4. Set Up Cloudflare Tunnel
+### 4. Get Neynar API Key
+1. Sign up at https://neynar.com
+2. Create an app and copy the API key
+3. Set as `NEYNAR_API_KEY` in `.env.local`
+
+### 5. Set Up Redis (Upstash)
+1. Create a free database at https://upstash.com
+2. Copy the REST URL and token
+3. Set as `REDIS_URL` and `REDIS_TOKEN` in `.env.local`
+
+### 6. Set Up Cloudflare Tunnel
 Farcaster Mini Apps require a publicly accessible URL. Guide the user to:
 1. Install cloudflared: https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/downloads/
 2. Run: `cloudflared tunnel --url http://localhost:3000`
 3. Copy the generated URL (e.g., `https://xxx-xxx-xxx.trycloudflare.com`)
 4. Set this as `NEXT_PUBLIC_URL` in `.env.local`
 
-### 5. Get Neynar API Key
-1. Sign up at https://neynar.com
-2. Create an app and copy the API key
-3. Set as `NEYNAR_API_KEY` in `.env.local`
-
-### 6. Set Up Redis (Upstash)
-1. Create a free database at https://upstash.com
-2. Copy the REST URL and token
-3. Set as `REDIS_URL` and `REDIS_TOKEN` in `.env.local`
-
-### 7. Generate Farcaster Account Association
-1. Go to https://warpcast.com/~/developers/manifest
-2. Use the Cloudflare tunnel URL from step 4 as the domain
-3. Copy the generated header, payload, and signature
-4. Set as `NEXT_PUBLIC_FARCASTER_HEADER`, `NEXT_PUBLIC_FARCASTER_PAYLOAD`, `NEXT_PUBLIC_FARCASTER_SIGNATURE` in `.env.local`
-
-### 8. Start Development Server
+### 7. Start Development Server
 ```bash
 pnpm run dev
 ```
@@ -153,11 +147,13 @@ contracts/lib/      # Dependencies (git submodules)
 
 ## Environment Variables
 
-Required (see .env.example):
+Required for local development (see .env.example):
 - `NEXT_PUBLIC_URL` - App URL for frame metadata
-- `NEXT_PUBLIC_FARCASTER_HEADER/PAYLOAD/SIGNATURE` - Frame account association
 - `NEYNAR_API_KEY`, `JWT_SECRET` - Authentication
 - `REDIS_URL`, `REDIS_TOKEN` - Notifications (Upstash)
+
+Required for production deployment:
+- `NEXT_PUBLIC_FARCASTER_HEADER/PAYLOAD/SIGNATURE` - Frame account association (generate at https://farcaster.xyz/~/developers/mini-apps/manifest)
 
 For contracts deployment, set RPC URLs and API keys in environment.
 
