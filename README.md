@@ -1,4 +1,4 @@
-# Builder's Forge
+# Ralph's Forge
 
 **The ultimate full-stack starter kit for Farcaster Mini Apps.**
 
@@ -109,7 +109,7 @@ Ralph enforces a strict ordering: **all smart contract tasks must complete befor
 
 ## Tribute & Credits
 
-Builder's Forge stands on the shoulders of giants. It is a remix of these open-source projects:
+Ralph's Forge stands on the shoulders of giants. It is a remix of these open-source projects:
 
 - **Frontend**: [Farcaster Mini App Starter](https://github.com/builders-garden/miniapp-starter) by Builders Garden.
 - **Smart Contracts**: [LazerForge](https://github.com/lazertechnologies/lazerforge) by Lazer Technologies.
