@@ -12,7 +12,7 @@ git clone https://github.com/hurley87/ralphs-forge.git
 cd ralphs-forge
 
 # Install Frontend dependencies
-npm install
+pnpm install
 
 # Install Smart Contract dependencies
 cd contracts && forge install && cd ..
@@ -43,19 +43,26 @@ Then fill in the required values:
 
 **Quick start for local dev**: If you just want to test without full Farcaster integration, use placeholder values for the Farcaster variables initially. The Neynar and Redis credentials are the main ones needed for auth to work.
 
+**Using Cloudflare Tunnel for local development**: Farcaster Mini Apps require a publicly accessible URL. Use [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/) to expose your local server:
+```bash
+# Install cloudflared, then run:
+cloudflared tunnel --url http://localhost:3000
+```
+Use the generated URL as your `NEXT_PUBLIC_URL` and for generating your Farcaster account association.
+
 **Contracts**: Create a `.env` file inside the `contracts/` folder for your RPC URLs and Private Keys (see `contracts/.env.example`).
 
 ### 3. Start Hacking
 
 **Run the Frontend:**
 ```bash
-npm run dev
+pnpm run dev
 ```
 Open http://localhost:3000 to see your Mini App.
 
 **Run Contracts:**
 ```bash
-npm run forge:test
+pnpm run forge:test
 ```
 
 ## Architecture
@@ -71,11 +78,11 @@ Run these from the root directory:
 
 | Command | Description |
 |---------|-------------|
-| `npm run dev` | Starts the Next.js local development server. |
-| `npm run forge:build` | Compiles your smart contracts. |
-| `npm run forge:test` | Runs Foundry tests for your contracts. |
-| `npm run forge:deploy` | Deploys contracts and syncs ABIs to the frontend. |
-| `npm run ralph` | Runs the autonomous development loop (see below). |
+| `pnpm run dev` | Starts the Next.js local development server. |
+| `pnpm run forge:build` | Compiles your smart contracts. |
+| `pnpm run forge:test` | Runs Foundry tests for your contracts. |
+| `pnpm run forge:deploy` | Deploys contracts and syncs ABIs to the frontend. |
+| `pnpm run ralph` | Runs the autonomous development loop (see below). |
 
 **Note**: Check `package.json` to configure the deployment script specific to your chain.
 
@@ -93,13 +100,13 @@ Ralph is an autonomous coding agent powered by Claude. It works through a genera
 
 2. **Run Ralph**: Execute the autonomous loop.
    ```bash
-   npm run ralph        # Default: 10 iterations
-   npm run ralph 20     # Custom: 20 iterations
+   pnpm run ralph        # Default: 10 iterations
+   pnpm run ralph 20     # Custom: 20 iterations
    ```
 
 Ralph will:
 - Pick the next unchecked task from the plan
-- Write the code and run verification (`forge test` or `npm run lint`)
+- Write the code and run verification (`forge test` or `pnpm run lint`)
 - Mark the task complete and commit
 - Exit and restart for the next task
 
