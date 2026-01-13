@@ -1,5 +1,5 @@
 ---
-description: Generates a technical blueprint in ralph/IMPLEMENTATION_PLAN.md
+description: Converts ralph/PRD.md into an implementation plan in ralph/IMPLEMENTATION_PLAN.md
 ---
 
 # Role
