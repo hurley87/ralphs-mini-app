@@ -8,7 +8,12 @@ This file contains lessons learned and patterns to avoid. The agent should check
 
 ## Best Practices
 
-[Add successful patterns and approaches]
+### Planning
+- Keep task descriptions under 10 words
+- Flag assumptions as questions rather than guessing
+- One task = one verifiable outcome
+
+[Add other successful patterns and approaches]
 
 ## Examples
 

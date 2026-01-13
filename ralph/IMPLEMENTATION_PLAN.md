@@ -13,3 +13,10 @@ This plan is derived from `ralph/PRD.md`. Tasks are grouped by story and should 
 ---
 
 **Note**: Always complete all Contract tasks before starting Frontend tasks.
+
+## Unresolved Questions
+
+[List any ambiguities or decisions needed before implementation]
+
+- [ ] Question 1?
+- [ ] Question 2?
