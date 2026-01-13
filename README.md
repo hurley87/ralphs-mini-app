@@ -6,63 +6,13 @@ This repository combines a production-ready Next.js frontend with a robust Found
 
 ## Quick Start
 
-### 1. Clone and Install
 ```bash
 git clone https://github.com/hurley87/ralphs-forge.git
 cd ralphs-forge
-
-# Install Frontend dependencies
-pnpm install
-
-# Install Smart Contract dependencies
-cd contracts && forge install && cd ..
 ```
 
-### 2. Environment Setup
-
-You will need environment variables for both the frontend (Next.js) and the contracts (Foundry).
-
-**Frontend**: Copy `.env.example` to `.env.local`:
 ```bash
-cp .env.example .env.local
-```
-
-Then fill in the required values:
-
-| Variable | How to get it |
-|----------|---------------|
-| `JWT_SECRET` | Generate a random string: `openssl rand -hex 32` |
-| `NEXT_PUBLIC_URL` | Your app URL (`http://localhost:3000` for local dev) |
-| `NEYNAR_API_KEY` | Sign up at [neynar.com](https://neynar.com) and get an API key |
-| `REDIS_URL` / `REDIS_TOKEN` | Create a free Redis database at [upstash.com](https://upstash.com) |
-| `NEXT_PUBLIC_FARCASTER_HEADER` | Frame account association (see below) |
-| `NEXT_PUBLIC_FARCASTER_PAYLOAD` | Frame account association (see below) |
-| `NEXT_PUBLIC_FARCASTER_SIGNATURE` | Frame account association (see below) |
-
-**Farcaster Account Association**: The `NEXT_PUBLIC_FARCASTER_*` variables come from signing your app's domain with your Farcaster account. Generate them using the [Warpcast Developer Manifest tool](https://warpcast.com/~/developers/manifest) or follow the [Mini App docs](https://docs.farcaster.xyz/developers/guides/miniapps).
-
-**Quick start for local dev**: If you just want to test without full Farcaster integration, use placeholder values for the Farcaster variables initially. The Neynar and Redis credentials are the main ones needed for auth to work.
-
-**Using Cloudflare Tunnel for local development**: Farcaster Mini Apps require a publicly accessible URL. Use [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/) to expose your local server:
-```bash
-# Install cloudflared, then run:
-cloudflared tunnel --url http://localhost:3000
-```
-Use the generated URL as your `NEXT_PUBLIC_URL` and for generating your Farcaster account association.
-
-**Contracts**: Create a `.env` file inside the `contracts/` folder for your RPC URLs and Private Keys (see `contracts/.env.example`).
-
-### 3. Start Hacking
-
-**Run the Frontend:**
-```bash
-pnpm run dev
-```
-Open http://localhost:3000 to see your Mini App.
-
-**Run Contracts:**
-```bash
-pnpm run forge:test
+claude "help me get set up"
 ```
 
 ## Architecture

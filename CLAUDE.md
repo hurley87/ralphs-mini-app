@@ -4,22 +4,72 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Builder's Forge is a full-stack starter kit for Farcaster Mini Apps. It combines a Next.js frontend (from Farcaster Mini App Starter by Builders Garden) with a Foundry smart contract environment (from LazerForge by Lazer Technologies).
+Ralph's Forge is a full-stack starter kit for Farcaster Mini Apps. It combines a Next.js frontend (from Farcaster Mini App Starter by Builders Garden) with a Foundry smart contract environment (from LazerForge by Lazer Technologies).
+
+## Setup Guide
+
+When a user asks for help setting up the project, follow these steps in order:
+
+### 1. Install Dependencies
+```bash
+pnpm install                           # Frontend dependencies
+cd contracts && forge install && cd .. # Smart contract dependencies
+```
+
+### 2. Create Environment File
+```bash
+cp .env.example .env.local
+```
+
+### 3. Generate JWT Secret
+```bash
+openssl rand -hex 32
+```
+Add this to `.env.local` as `JWT_SECRET`.
+
+### 4. Set Up Cloudflare Tunnel
+Farcaster Mini Apps require a publicly accessible URL. Guide the user to:
+1. Install cloudflared: https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/downloads/
+2. Run: `cloudflared tunnel --url http://localhost:3000`
+3. Copy the generated URL (e.g., `https://xxx-xxx-xxx.trycloudflare.com`)
+4. Set this as `NEXT_PUBLIC_URL` in `.env.local`
+
+### 5. Get Neynar API Key
+1. Sign up at https://neynar.com
+2. Create an app and copy the API key
+3. Set as `NEYNAR_API_KEY` in `.env.local`
+
+### 6. Set Up Redis (Upstash)
+1. Create a free database at https://upstash.com
+2. Copy the REST URL and token
+3. Set as `REDIS_URL` and `REDIS_TOKEN` in `.env.local`
+
+### 7. Generate Farcaster Account Association
+1. Go to https://warpcast.com/~/developers/manifest
+2. Use the Cloudflare tunnel URL from step 4 as the domain
+3. Copy the generated header, payload, and signature
+4. Set as `NEXT_PUBLIC_FARCASTER_HEADER`, `NEXT_PUBLIC_FARCASTER_PAYLOAD`, `NEXT_PUBLIC_FARCASTER_SIGNATURE` in `.env.local`
+
+### 8. Start Development Server
+```bash
+pnpm run dev
+```
+The app will be available at http://localhost:3000 (and via the Cloudflare tunnel URL for Farcaster testing).
 
 ## Commands
 
 ### Frontend Development
 ```bash
-npm run dev       # Start Next.js dev server
-npm run build     # Build production bundle
-npm run lint      # Run ESLint
+pnpm run dev       # Start Next.js dev server
+pnpm run build     # Build production bundle
+pnpm run lint      # Run ESLint
 ```
 
 ### Smart Contracts
 ```bash
-npm run forge:build   # Compile contracts
-npm run forge:test    # Run Foundry tests
-npm run forge:deploy  # Deploy and sync ABI to frontend
+pnpm run forge:build   # Compile contracts
+pnpm run forge:test    # Run Foundry tests
+pnpm run forge:deploy  # Deploy and sync ABI to frontend
 
 # Direct Foundry commands (from contracts/ directory)
 forge test -vvv                    # Verbose test output
