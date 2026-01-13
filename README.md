@@ -22,8 +22,28 @@ cd contracts && forge install && cd ..
 
 You will need environment variables for both the frontend (Next.js) and the contracts (Foundry).
 
-- **Frontend**: Copy `.env.example` to `.env.local` and add your Farcaster/WalletConnect keys.
-- **Contracts**: Create a `.env` file inside the `contracts/` folder for your RPC URLs and Private Keys (see `contracts/.env.example`).
+**Frontend**: Copy `.env.example` to `.env.local`:
+```bash
+cp .env.example .env.local
+```
+
+Then fill in the required values:
+
+| Variable | How to get it |
+|----------|---------------|
+| `JWT_SECRET` | Generate a random string: `openssl rand -hex 32` |
+| `NEXT_PUBLIC_URL` | Your app URL (`http://localhost:3000` for local dev) |
+| `NEYNAR_API_KEY` | Sign up at [neynar.com](https://neynar.com) and get an API key |
+| `REDIS_URL` / `REDIS_TOKEN` | Create a free Redis database at [upstash.com](https://upstash.com) |
+| `NEXT_PUBLIC_FARCASTER_HEADER` | Frame account association (see below) |
+| `NEXT_PUBLIC_FARCASTER_PAYLOAD` | Frame account association (see below) |
+| `NEXT_PUBLIC_FARCASTER_SIGNATURE` | Frame account association (see below) |
+
+**Farcaster Account Association**: The `NEXT_PUBLIC_FARCASTER_*` variables come from signing your app's domain with your Farcaster account. Generate them using the [Warpcast Developer Manifest tool](https://warpcast.com/~/developers/manifest) or follow the [Mini App docs](https://docs.farcaster.xyz/developers/guides/miniapps).
+
+**Quick start for local dev**: If you just want to test without full Farcaster integration, use placeholder values for the Farcaster variables initially. The Neynar and Redis credentials are the main ones needed for auth to work.
+
+**Contracts**: Create a `.env` file inside the `contracts/` folder for your RPC URLs and Private Keys (see `contracts/.env.example`).
 
 ### 3. Start Hacking
 
